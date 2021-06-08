@@ -26,7 +26,7 @@ const Project = require('../models/project');
 
 const getProjects = async(req, res=response)=>{
 
-            const projects = await Project.find({'user':req.body.user})
+            const projects = await Project.find({'user':req.params.user})
                                             .populate('task');
 
         res.json({

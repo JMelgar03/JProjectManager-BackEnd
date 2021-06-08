@@ -24,7 +24,7 @@ router.post(
     ],
     CreateProject );
 
-router.get('/', getProjects );
+router.get('/:user', getProjects );
 
 router.put('/:id',[   //middlewares
     check('projectName', 'Project Name is required.').not().isEmpty(),
