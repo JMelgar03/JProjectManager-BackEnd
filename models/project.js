@@ -10,26 +10,27 @@ const ProjectSchema = Schema({
     },
     startDate:{
         type: Date,
-        require: true
+        required: true
     },
     endDate:{
         type: Date,
-        require: true
+        required: true
     },
-    task:{
-        type: Array,
-    },
+    task:[{
+        type: Schema.Types.ObjectId,
+        ref: 'Task'
+    }],
     progress:{
         type: String,
-        require: true
+        required: true
     },
     imgBackground:{
         type: String,
-        require: true
+        required: true
     },
     user:{
         type: String,
-        require: true
+        required: true
     }
 
 

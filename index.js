@@ -23,6 +23,7 @@ app.use( express.json() );
 
 //Rutas
 app.use('/api/project', require('./routes/project'));
+app.use('/api/task', require('./routes/task'));
 
 
 //escuchar peticiones

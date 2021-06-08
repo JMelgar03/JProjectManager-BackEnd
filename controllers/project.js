@@ -26,7 +26,8 @@ const Project = require('../models/project');
 
 const getProjects = async(req, res=response)=>{
 
-            const projects = await Project.find({'user':req.body.user});
+            const projects = await Project.find({'user':req.body.user})
+                                            .populate('task');
 
         res.json({
             ok:true,
@@ -35,16 +36,17 @@ const getProjects = async(req, res=response)=>{
 
     };
 
+    
 
     const updateProject = async(req, res=response)=>{
-       const projectId = req.params.id;
+       const idProject = req.params.id;
 
        try {
             
-            const project = await Project.findById(projectId);
+            const project = await Project.findById(idProject);
 
             if(!project){
-                res.status(404).json({
+                return res.status(404).json({
                     ok: false,
                     msg: 'the project does not exist or was deleted'
                 })
@@ -61,7 +63,7 @@ const getProjects = async(req, res=response)=>{
                ...req.body
            }
 
-           const projectUpdated = await Project.findByIdAndUpdate(projectId, newProject, {new:true});
+           const projectUpdated = await Project.findByIdAndUpdate(idProject, newProject, {new:true});
            res.json({
                ok: true,
               Project: projectUpdated
@@ -84,11 +86,11 @@ const getProjects = async(req, res=response)=>{
 
     const deleteProject = async(req, res=response)=>{
         
-        const projectId = req.params.id;
+        const idProject = req.params.id;
 
         try {
              
-             const project = await Project.findById(projectId);
+             const project = await Project.findById(idProject);
  
              if(!project){
                  res.status(404).json({
@@ -105,7 +107,7 @@ const getProjects = async(req, res=response)=>{
              }
  
  
-             await Project.findByIdAndDelete(projectId);
+             await Project.findByIdAndDelete(idProject);
 
             res.json({
                 ok: true,
