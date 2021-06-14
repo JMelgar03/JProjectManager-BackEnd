@@ -22,7 +22,6 @@ const ProjectSchema = Schema({
     }],
     progress:{
         type: String,
-        required: true
     },
     imgBackground:{
         type: String,

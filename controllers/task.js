@@ -1,7 +1,7 @@
 const { response } = require('express');
 const Task = require('../models/task');
 const Project = require('../models/project');
-const project = require('../models/project');
+
 
 const createTask = async(req, res = response)=>{
     
@@ -25,11 +25,11 @@ const createTask = async(req, res = response)=>{
         project.task.push(taskSaved._id);
         
 
-        const projectUpdated = await Project.findByIdAndUpdate(idProject, project, {new:true});
+         await Project.findByIdAndUpdate(idProject, project);
 
         res.status(201).json({
             ok:true,
-           projectUpdated
+            taskSaved
         })
         
     } catch (error) {
